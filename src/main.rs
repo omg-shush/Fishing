@@ -17,6 +17,9 @@ pub struct Player{
 }
 
 fn main() {
+    #[cfg(target_arch = "wasm32")]
+    console_error_panic_hook::set_once();
+
     App::new()
     .add_plugins(DefaultPlugins
                 .set(ImagePlugin::default_nearest())
@@ -25,6 +28,8 @@ fn main() {
                         title: "Fishing".into(),
                         resolution: (640.0, 480.0).into(),
                         resizable: false,
+                        canvas: Some("#canvas".to_string()),
+                        fit_canvas_to_parent: true,
                         ..default()
                     }),
                     ..default()
